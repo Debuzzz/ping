@@ -46,11 +46,6 @@ const items = [
     url: "/dashboard/reports",
     icon: BarChart3,
   },
-  {
-    title: "Paramètres",
-    url: "/dashboard/settings",
-    icon: Settings,
-  },
 ]
 
 export function AppSidebar() {

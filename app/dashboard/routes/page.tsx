@@ -122,30 +122,43 @@ export default function RoutesPage() {
       </header>
 
       <div className="flex-1 p-6">
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 h-[calc(100vh-8rem)]">
-          {/* Colonne de gauche - Liste des tournées */}
-          <div className="xl:col-span-2 space-y-6 overflow-auto">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 h-[calc(100vh-10rem)]">
+          {/* Map */}
+          <div className="xl:col-span-2">
+            <Card className="h-full">
+              <CardContent className="p-0 h-full">
+                <div className="relative h-full">
+                  {/* Header de la carte */}
+                  <div className="absolute top-0 left-0 right-0 z-[1000] bg-white/95 backdrop-blur-sm border-b p-4 rounded-t-lg">
+                    <h3 className="font-semibold text-lg">Suivi en temps réel</h3>
+                    <p className="text-sm text-muted-foreground">Position des véhicules</p>
+                  </div>
+                  {/* Carte Leaflet */}
+                  <div className="absolute inset-0 pt-20">
+                    <MapComponent routes={routes} />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+          
+          {/* RECAP - Liste des tournées */}
+          <div className="xl:col-span-1 space-y-1 overflow-auto">
             {/* Statistiques rapides */}
-            <div className="grid gap-4 md:grid-cols-4">
-              <Card>
+            <div className="grid gap-2 md:grid-cols-1">
+              <Card className="flex flex-row bg-gray-50 shadow-sm">
                 <CardContent className="p-4">
                   <div className="text-2xl font-bold text-blue-600">2</div>
                   <p className="text-sm text-muted-foreground">En cours</p>
                 </CardContent>
-              </Card>
-              <Card>
                 <CardContent className="p-4">
                   <div className="text-2xl font-bold text-green-600">1</div>
                   <p className="text-sm text-muted-foreground">Terminées</p>
                 </CardContent>
-              </Card>
-              <Card>
                 <CardContent className="p-4">
                   <div className="text-2xl font-bold text-yellow-600">1</div>
                   <p className="text-sm text-muted-foreground">En attente</p>
                 </CardContent>
-              </Card>
-              <Card>
                 <CardContent className="p-4">
                   <div className="text-2xl font-bold">52%</div>
                   <p className="text-sm text-muted-foreground">Progression globale</p>
@@ -206,54 +219,12 @@ export default function RoutesPage() {
                         </div>
                       </div>
 
-                      <div className="flex flex-col gap-2">
-                        {route.status === "En cours" && (
-                          <>
-                            <Button size="sm" variant="outline">
-                              <Pause className="h-4 w-4 mr-2" />
-                              Suspendre
-                            </Button>
-                            <Button size="sm" variant="outline">
-                              <Square className="h-4 w-4 mr-2" />
-                              Terminer
-                            </Button>
-                          </>
-                        )}
-                        {route.status === "En attente" && (
-                          <Button size="sm">
-                            <Play className="h-4 w-4 mr-2" />
-                            Démarrer
-                          </Button>
-                        )}
-                        <Button size="sm" variant="ghost">
-                          Voir détails
-                        </Button>
-                      </div>
+                
                     </div>
                   </CardContent>
                 </Card>
               ))}
             </div>
-          </div>
-
-          {/* Colonne de droite - Carte Leaflet */}
-          <div className="xl:col-span-1">
-            <Card className="h-full">
-              <CardContent className="p-0 h-full">
-                <div className="relative h-full">
-                  {/* Header de la carte */}
-                  <div className="absolute top-0 left-0 right-0 z-[1000] bg-white/95 backdrop-blur-sm border-b p-4 rounded-t-lg">
-                    <h3 className="font-semibold text-lg">Suivi en temps réel</h3>
-                    <p className="text-sm text-muted-foreground">Position des véhicules</p>
-                  </div>
-
-                  {/* Carte Leaflet */}
-                  <div className="h-full pt-20">
-                    <MapComponent routes={routes} />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </div>
